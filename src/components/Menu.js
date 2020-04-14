@@ -3,17 +3,17 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {faGreaterThan} from "@fortawesome/free-solid-svg-icons";
 
 const Menu = (props) => {
-  const {menuItems} = props;
+  const {menuList} = props;
   return(
     <div id="menu">
       <div id="menu-heading">
-        {menuItems[0].name}
+        {menuList.menuName}
       </div>
-      {menuItems.slice(1).map((menuItem, index) => {
-        if(menuItem.isSelected){
+      {menuList.menuOptions.map((option, index) => {
+        if(option.isSelected){
           return(
             <div className="menu-item active" key={index}>
-              {menuItem.name}
+              {option.optionName}
               <FontAwesomeIcon className="active-menu-item" icon={faGreaterThan} />
             </div>
           )
@@ -21,7 +21,7 @@ const Menu = (props) => {
         else{
           return(
             <div className="menu-item" key={index}>
-              {menuItem.name}
+              {option.optionName}
             </div>
           )
         }

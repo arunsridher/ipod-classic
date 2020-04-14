@@ -11,15 +11,15 @@ import {
 import ZingTouch from 'zingtouch';
 
 class Controls extends React.Component {
-
   handleScroll = (callbackFromParent) => {
     let angle = 0
     const target = document.getElementById('controls');
     const region = new ZingTouch.Region(target);
     region.bind(target, 'rotate', function(e) {
-      angle += Math.floor(e.detail.distanceFromLast);
-      if(Math.abs(angle) > 30){
-        let scrollDir = angle > 30 ? 1 : -1;
+      angle += e.detail.distanceFromLast;
+      console.log(angle);
+      if(Math.abs(angle) > 35){
+        let scrollDir = angle > 0 ? 1 : -1;
         angle = 0;
         callbackFromParent(scrollDir);
       }
@@ -34,7 +34,7 @@ class Controls extends React.Component {
     const {callbackFromParent} = this.props;
     return (
       <div id="controls" onClick={() => this.handleScroll(callbackFromParent)} draggable="false">
-        <div id="menu-button" onClick={() => this.handleClick("menu")}>
+        <div id="menu-button" className="unselectable" onClick={() => this.handleClick("menu")}>
           Menu
         </div>
         <div id="next">
