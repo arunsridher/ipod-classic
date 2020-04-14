@@ -1,6 +1,6 @@
 import React from 'react';
 import Menu from './Menu';
-import { noAuto } from '@fortawesome/fontawesome-svg-core';
+import imageURL from '../player.png'
 
 const HomeScreen = (props) => {
   let {hideMenu, menuList} = props;
@@ -15,12 +15,23 @@ const HomeScreen = (props) => {
         break;
       }
     }
-    return(
-      <div id="home-screen">
-        <img src={option.backgroundImage} alt={option.optionName} style={Styles.imgStyle}/>
-        <p>{option.optionName}</p>
-      </div>
-    );
+    if(option.optionName === "All Songs"){
+      return(
+        <div id="home-screen">
+          <div className="image-container">
+            <img src={imageURL} />
+          </div>
+        </div>
+      );
+    }
+    else{
+      return(
+        <div id="home-screen">
+          <img src={option.backgroundImage} alt={option.optionName} style={Styles.imgStyle}/>
+          <p>{option.optionName}</p>
+        </div>
+      );
+    }
   }
   else{
     return(

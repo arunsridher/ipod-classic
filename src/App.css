@@ -155,3 +155,54 @@
   -ms-user-select: none;
   user-select: none;
 }
+
+.image-container{
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+}
+
+.image-container img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* .music-player{
+  height: 98%;
+  width: 100%;
+  padding-top: 2%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.song-details-container{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.song-image{
+  width: 100px;
+  height: 100px;
+  margin: 10px;
+}
+
+.song-image img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.song-details{
+  
+}
+
+.player{
+  width: 90%;
+  height: 90%;
+  overflow: hidden;
+} */
