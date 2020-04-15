@@ -2,6 +2,7 @@
   text-align: center;
 }
 
+/* main container */
 .ipod{
   margin: 5% auto;
   width: 20em;
@@ -12,6 +13,7 @@
   -webkit-box-reflect: below 0 linear-gradient(transparent, rgba(218,218,218,0.5));
 }
 
+/* screen */
 .screen{
   position: relative;
     top: .9em;
@@ -22,6 +24,7 @@
     border-radius: .3125em;
 }
 
+/* add screen border */
 .screen::before {
   content: "";
   position: absolute;
@@ -33,6 +36,7 @@
   border-radius: .1em;
 }
 
+/* display component in the screen */
 .display{
   position: absolute;
   width: 17.4em;
@@ -41,6 +45,7 @@
   top: 0.25em;
 }
 
+/* controls wheel */
 #controls{
   position: relative;
   margin: 3.5em auto;
@@ -52,6 +57,7 @@
   box-shadow: 0 0 .1em #999;
 }
 
+/* menu button */
 #menu-button{
   position: absolute;
   top: -3.3em;
@@ -64,6 +70,7 @@
   cursor: default;
 }
 
+/* next button */
 #next{
   position: absolute;
   left: 7em;
@@ -71,6 +78,7 @@
   /* border: 1px solid red; */
 }
 
+/* play button */
 #play{
   position: absolute;
   top: 6.9em;
@@ -80,6 +88,7 @@
   /* border: 1px solid red; */
 }
 
+/* previous button */
 #previous{
   position: absolute;
   top: 1.75em;
@@ -87,6 +96,7 @@
   /* border: 1px solid red; */
 }
 
+/* select button */
 #select{
   position: absolute;
   width: 78px;
@@ -95,6 +105,7 @@
   /* border: 1px solid #fff; */
 }
 
+/* button icon styles */
 .icon-style{
   font-size: 0.8em !important;
   padding: 2px;
@@ -102,13 +113,15 @@
   font-weight: lighter;
 }
 
+/* home screen styles */
 #home-screen{
   position: relative;
-  background-color: #E20D5F;
+  background-color: #fff;
   width: 100%;
   height: 100%;
 }
 
+/* home screen menu styles */
 #menu{
   position: relative;
   top: 0px;
@@ -121,12 +134,14 @@
   color: #262626;
 }
 
+/* menu heading style */
 #menu-heading{
   font-size: 24px;
   font-weight: bold;
   padding: 5px 5px;
 }
 
+/* menu item style */
 .menu-item{
   position: relative;
   font-size: 14px;
@@ -135,6 +150,7 @@
   margin-right: 10px;
 }
 
+/* active menu style */
 .active{
   background-color: #A9CDFC;
 }
@@ -147,6 +163,7 @@
   font-weight: lighter;
 }
 
+/* style for text - disabling select option */
 .unselectable {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -156,12 +173,14 @@
   user-select: none;
 }
 
+/* image container style */
 .image-container{
   width: 100%;
   height: 100%;
   background-color: #fff;
 }
 
+/* image style */
 .image-container img{
   width: 100%;
   height: 100%;
