@@ -109,6 +109,9 @@ class App extends React.Component {
         break;
       case 1:
       case -1:
+        //discard scroll when showing an option page
+        if(this.state.hideMenu)
+          return;
         // if either clockwise or anti-clockwise scroll has been detected
         let index;
         let list = this.state.menuList;
