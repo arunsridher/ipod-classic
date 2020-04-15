@@ -87,6 +87,7 @@ class App extends React.Component {
           this.setState({menuList: mList});
         }
         break;
+        //if select button is clicked
       case "select":
         let menu = this.state.menuList;
         //if main menu is being displayed
@@ -107,11 +108,18 @@ class App extends React.Component {
           this.setState({hideMenu:true});
         }
         break;
+        //if play/pause button is clicked
       case "play-pause":
         if(this.state.hideMenu){
           let allSongs = this.state.menuList.menuOptions[1].menuList.menuOptions[0];
+          //if menu is hidden and all songs option is selected -> means we are in player screen
           if(allSongs.isSelected){
+            //get the audio element
             let audio = document.getElementById("audio");
+            //TODO: use these values to show song prgress; refactor code have seperate class componenet
+            console.log(audio.duration);
+            console.log(audio.currentTime);
+            //toggle play/pause
             if(audio.paused){
               audio.play();
             }else{
@@ -122,9 +130,24 @@ class App extends React.Component {
         break;
       case 1:
       case -1:
-        //discard scroll when showing an option page
-        if(this.state.hideMenu)
+        //to increase or decrease volume when a song is being played
+        if(this.state.hideMenu){
+          let allSongs = this.state.menuList.menuOptions[1].menuList.menuOptions[0];
+          //check if we are in the all songs screen
+          if(this.state.menuList.menuOptions[1].menuList.isActive && allSongs.isSelected){
+            let audio = document.getElementById("audio");
+            //increase or decrease volume if not paused
+            if(!audio.paused){
+              console.log(audio.volume);
+              let volumeChanger = dataFromChild === 1? 0.1 : -0.1;
+              volumeChanger += audio.volume;
+              //limit volume value between 0 and 1
+              volumeChanger = volumeChanger > 1 ? 1 : (volumeChanger < 0? 0 : volumeChanger);
+              audio.volume = volumeChanger;
+            }
+          }
           return;
+        }
         // if either clockwise or anti-clockwise scroll has been detected
         let index;
         let list = this.state.menuList;
