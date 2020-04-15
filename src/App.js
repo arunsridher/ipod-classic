@@ -66,64 +66,99 @@ class App extends React.Component {
 
   //controls callback - whenever we scroll or click a button this method will be called
   myCallback = (dataFromChild) => {
-    switch(dataFromChild){
+    switch (dataFromChild) {
       //if menu button is clicked
       case "menu":
         //to hide main menu
-        if(this.state.hideMenu){
-          this.setState({hideMenu: false});
+        if (this.state.hideMenu) {
+          this.setState({ hideMenu: false });
         }
         //hide music menu and show main menu
-        else if(!this.state.menuList.isActive){
+        else if (!this.state.menuList.isActive) {
           let mList = this.state.menuList;
           let innerMList = mList.menuOptions[1].menuList;
           let options = innerMList.menuOptions;
-          for(let i = 0; i < options.length; i++){
+          for (let i = 0; i < options.length; i++) {
             options[i].isSelected = false;
           }
           options[0].isSelected = true;
           innerMList.isActive = false;
           mList.isActive = true;
-          this.setState({menuList: mList});
+          this.setState({ menuList: mList });
         }
         break;
-        //if select button is clicked
+      //if select button is clicked
       case "select":
         let menu = this.state.menuList;
         //if main menu is being displayed
-        if(menu.isActive){
+        if (menu.isActive) {
           //if music options menu is selected show musci menu
-          if(menu.menuOptions[1].isSelected){
+          if (menu.menuOptions[1].isSelected) {
             menu.isActive = false;
             menu.menuOptions[1].menuList.isActive = true;
-            this.setState({menuList:menu});
+            this.setState({ menuList: menu });
           }
-          else{
+          else {
             //hide menu and show corresponding screen
-            this.setState({hideMenu:true});
+            this.setState({ hideMenu: true });
           }
         }
-        else{
+        else {
           //hide music menu and show corresponding screen
-          this.setState({hideMenu:true});
+          this.setState({ hideMenu: true });
         }
         break;
-        //if play/pause button is clicked
+      //if play/pause button is clicked
       case "play-pause":
-        if(this.state.hideMenu){
+        if (this.state.hideMenu) {
           let allSongs = this.state.menuList.menuOptions[1].menuList.menuOptions[0];
           //if menu is hidden and all songs option is selected -> means we are in player screen
-          if(allSongs.isSelected){
+          if (allSongs.isSelected) {
             //get the audio element
             let audio = document.getElementById("audio");
             //TODO: use these values to show song prgress; refactor code have seperate class componenet
             console.log(audio.duration);
             console.log(audio.currentTime);
             //toggle play/pause
-            if(audio.paused){
+            if (audio.paused) {
               audio.play();
-            }else{
+            } else {
               audio.pause();
+            }
+          }
+        }
+        break;
+      case "fast-forward":
+        if (this.state.hideMenu) {
+          let allSongs = this.state.menuList.menuOptions[1].menuList.menuOptions[0];
+          //if menu is hidden and all songs option is selected -> means we are in player screen
+          if (allSongs.isSelected) {
+            //get the audio element
+            let audio = document.getElementById("audio");
+            console.log(audio.duration);
+            console.log(audio.currentTime);
+            if (!audio.paused) {
+              let totalDuration = audio.duration;
+              let currentTime = audio.currentTime;
+              currentTime = (currentTime + 15 < totalDuration) ? currentTime + 15 : totalDuration;
+              audio.currentTime = currentTime;
+            }
+          }
+        }
+        break;
+      case "fast-backward":
+        if (this.state.hideMenu) {
+          let allSongs = this.state.menuList.menuOptions[1].menuList.menuOptions[0];
+          //if menu is hidden and all songs option is selected -> means we are in player screen
+          if (allSongs.isSelected) {
+            //get the audio element
+            let audio = document.getElementById("audio");
+            console.log(audio.duration);
+            console.log(audio.currentTime);
+            if (!audio.paused) {
+              let currentTime = audio.currentTime;
+              currentTime = (currentTime - 15 > 0) ? currentTime - 15 : 0;
+              audio.currentTime = currentTime;
             }
           }
         }
@@ -131,18 +166,18 @@ class App extends React.Component {
       case 1:
       case -1:
         //to increase or decrease volume when a song is being played
-        if(this.state.hideMenu){
+        if (this.state.hideMenu) {
           let allSongs = this.state.menuList.menuOptions[1].menuList.menuOptions[0];
           //check if we are in the all songs screen
-          if(this.state.menuList.menuOptions[1].menuList.isActive && allSongs.isSelected){
+          if (this.state.menuList.menuOptions[1].menuList.isActive && allSongs.isSelected) {
             let audio = document.getElementById("audio");
             //increase or decrease volume if not paused
-            if(!audio.paused){
+            if (!audio.paused) {
               console.log(audio.volume);
-              let volumeChanger = dataFromChild === 1? 0.1 : -0.1;
+              let volumeChanger = dataFromChild === 1 ? 0.1 : -0.1;
               volumeChanger += audio.volume;
               //limit volume value between 0 and 1
-              volumeChanger = volumeChanger > 1 ? 1 : (volumeChanger < 0? 0 : volumeChanger);
+              volumeChanger = volumeChanger > 1 ? 1 : (volumeChanger < 0 ? 0 : volumeChanger);
               audio.volume = volumeChanger;
             }
           }
@@ -152,10 +187,10 @@ class App extends React.Component {
         let index;
         let list = this.state.menuList;
         //see whethe the displayed menu is main menu or music menu
-        let options = list.isActive? list.menuOptions : list.menuOptions[1].menuList.menuOptions;
+        let options = list.isActive ? list.menuOptions : list.menuOptions[1].menuList.menuOptions;
         //find the current active option
-        for(let i = 0; i < options.length; i++){
-          if(options[i].isSelected){
+        for (let i = 0; i < options.length; i++) {
+          if (options[i].isSelected) {
             index = i;
             break;
           }
@@ -163,18 +198,18 @@ class App extends React.Component {
         //make the current option inactive
         options[index].isSelected = false;
         //if clock wise make next option active otherwise make previous option active
-        let nexIndex = dataFromChild === 1 ? (index+1)%options.length : (index > 0 ? index-1: options.length-1);
+        let nexIndex = dataFromChild === 1 ? (index + 1) % options.length : (index > 0 ? index - 1 : options.length - 1);
         options[nexIndex].isSelected = true;
         //set state to render the updates
-        this.setState({menuList: list});
+        this.setState({ menuList: list });
         break;
       default:
         console.log("wrong input");
     }
   }
 
-  render(){
-    const {hideMenu, menuList} = this.state;
+  render() {
+    const { hideMenu, menuList } = this.state;
     return (
       <div className="App">
         <div className="ipod">

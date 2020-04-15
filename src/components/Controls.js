@@ -45,14 +45,14 @@ class Controls extends React.Component {
         <div id="menu-button" className="unselectable" onClick={() => this.handleClick("menu")}>
           Menu
         </div>
-        <div id="next">
+        <div id="next" onClick={() => this.handleClick("fast-forward")}>
           <FontAwesomeIcon className="icon-style" icon={faFastForward} />
         </div>
         <div id="play" onClick={() => this.handleClick("play-pause")}>
           <FontAwesomeIcon className="icon-style" icon={faPlay} />
           <FontAwesomeIcon className="icon-style" icon={faPause} />
         </div>
-        <div id="previous">
+        <div id="previous" onClick={() => this.handleClick("fast-backward")}>
           <FontAwesomeIcon className="icon-style" icon={faFastBackward} />
         </div>
         <div id="select" onClick={() => this.handleClick("select")}></div>
