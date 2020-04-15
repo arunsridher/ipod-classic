@@ -48,7 +48,7 @@ class Controls extends React.Component {
         <div id="next">
           <FontAwesomeIcon className="icon-style" icon={faFastForward} />
         </div>
-        <div id="play">
+        <div id="play" onClick={() => this.handleClick("play-pause")}>
           <FontAwesomeIcon className="icon-style" icon={faPlay} />
           <FontAwesomeIcon className="icon-style" icon={faPause} />
         </div>

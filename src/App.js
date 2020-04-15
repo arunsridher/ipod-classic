@@ -107,6 +107,19 @@ class App extends React.Component {
           this.setState({hideMenu:true});
         }
         break;
+      case "play-pause":
+        if(this.state.hideMenu){
+          let allSongs = this.state.menuList.menuOptions[1].menuList.menuOptions[0];
+          if(allSongs.isSelected){
+            let audio = document.getElementById("audio");
+            if(audio.paused){
+              audio.play();
+            }else{
+              audio.pause();
+            }
+          }
+        }
+        break;
       case 1:
       case -1:
         //discard scroll when showing an option page

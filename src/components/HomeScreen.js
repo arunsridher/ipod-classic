@@ -4,6 +4,7 @@ import React from 'react';
 import Menu from './Menu';
 //get music player background image
 import imageURL from '../player.png'
+import audioFile from '../Thunder.mp3';
 
 //home screen functional property with props set from App
 const HomeScreen = (props) => {
@@ -28,7 +29,11 @@ const HomeScreen = (props) => {
       return(
         <div id="home-screen">
           <div className="image-container">
-            <img src={imageURL} />
+            <img src={imageURL} alt="player dummy screen" />
+            <audio id="audio" autoPlay>  
+              <source src={audioFile} type="audio/mpeg" />  
+              <p> Your browser doesn't support the audio tag </p>
+            </audio> 
           </div>
         </div>
       );
