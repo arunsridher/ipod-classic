@@ -135,12 +135,14 @@ class App extends React.Component {
           if (allSongs.isSelected) {
             //get the audio element
             let audio = document.getElementById("audio");
-            console.log(audio.duration);
-            console.log(audio.currentTime);
             if (!audio.paused) {
+              //get total duration of the song
               let totalDuration = audio.duration;
+              //get current seek time
               let currentTime = audio.currentTime;
+              //forward by 15 seconds; if seek time croses total duration set it to total duration
               currentTime = (currentTime + 15 < totalDuration) ? currentTime + 15 : totalDuration;
+              //update the audio currentime
               audio.currentTime = currentTime;
             }
           }
@@ -153,11 +155,12 @@ class App extends React.Component {
           if (allSongs.isSelected) {
             //get the audio element
             let audio = document.getElementById("audio");
-            console.log(audio.duration);
-            console.log(audio.currentTime);
             if (!audio.paused) {
+              //get current time
               let currentTime = audio.currentTime;
+              //reduce current time by 15 seconds if its still greater than 0 or set it to 0
               currentTime = (currentTime - 15 > 0) ? currentTime - 15 : 0;
+              //update the audio current time
               audio.currentTime = currentTime;
             }
           }
